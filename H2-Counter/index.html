@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Counter</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <main class="container">
+            <div class="custom-number-input">
+                <label for="custom-input-number" class="label"
+                    >Counter Input</label
+                >
+                <div class="input-container">
+                    <button
+                        data-action="decrement"
+                        class="button button-decrement"
+                    >
+                        −
+                    </button>
+                    <input
+                        title="number"
+                        type="number"
+                        class="number-input"
+                        name="custom-input-number"
+                        value="0"
+                    />
+                    <button
+                        data-action="increment"
+                        class="button button-increment"
+                    >
+                        +
+                    </button>
+                </div>
+                <div class="reset">
+                    <button data-action="reset" class=" button-reset">
+                        Reset
+                    </button>
+                </div>
+            </div>
+        </main>
+        <script src="script.js"></script>
+    </body>
+</html>
