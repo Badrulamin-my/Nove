@@ -21,11 +21,13 @@ const numberInput = document.querySelector('.number-input');
 function updateCounter(newValue) {
     if (newValue < 0) {
         newValue = 0;
-    } else if (newValue > 99) {
-        newValue = 99;
     }
     numberInput.value = newValue;
 }
+// Add this to limit the number 
+/* else if (newValue > 1000) {
+        newValue = 1000;
+    }*/
 
 /* Event listeners for the buttons and input field*/
 incrementButton.addEventListener('click', () => {

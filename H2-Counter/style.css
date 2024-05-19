@@ -20,6 +20,7 @@ body {
     height: 100vh;
     margin: 0;
     text-align: center;
+    background: linear-gradient(to right, rgb(120, 209, 221), rgb(178, 216, 61));
 }
 
 .container {
@@ -29,8 +30,8 @@ body {
 }
 
 .custom-number-input {
-    height: 6rem;
-    width: 8rem;
+    height: 8rem;
+    width: 15rem;
     padding: 2rem;
     border: solid #88888869 1px;
     border-radius: 0.375rem;
