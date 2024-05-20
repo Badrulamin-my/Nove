@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     noButton.style.top = `${yesButtonRect.top + 10}px`; //for offset
                     noButton.style.zIndex = '-1'; // Ensure the no-button is behind
                 } else {
-                    const x = Math.random() * (window.innerWidth - noButton.clientWidth);
+                    const x = Math.random() * (window.innerWidth - noButton.clientWidth); //generates a random floating-point number
                     const y = Math.random() * (window.innerHeight - noButton.clientHeight);
                     noButton.style.position = 'absolute';
                     noButton.style.left = `${x}px`;
