@@ -8,3 +8,34 @@
 
 // ##########################################
 // write your code here
+
+document.addEventListener('DOMContentLoaded', function() {
+    const noButton = document.getElementById('no-button');
+    let hoverCount = 0;
+    noButton.addEventListener('mouseover', moveButton);
+    noButton.addEventListener('click', moveButton);
+
+    function moveButton() {
+        hoverCount++;
+                if (hoverCount >= 6) {
+                    // Move the no-button behind the yes-button
+                    const yesButton = document.getElementById('yes-button');
+                    const yesButtonRect = yesButton.getBoundingClientRect();
+                    noButton.style.position = 'absolute';
+                    noButton.style.left = `${yesButtonRect.left + 10}px`;//for offset
+                    noButton.style.top = `${yesButtonRect.top + 10}px`; //for offset
+                    noButton.style.zIndex = '-1'; // Ensure the no-button is behind
+                } else {
+                    const x = Math.random() * (window.innerWidth - noButton.clientWidth);
+                    const y = Math.random() * (window.innerHeight - noButton.clientHeight);
+                    noButton.style.position = 'absolute';
+                    noButton.style.left = `${x}px`;
+                    noButton.style.top = `${y}px`;
+                }
+            }
+
+    const yesButton = document.getElementById('yes-button');
+    yesButton.addEventListener('click', function() {
+        alert('I love you too!!');
+    });
+});
