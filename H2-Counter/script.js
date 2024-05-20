@@ -12,24 +12,42 @@
 
 // ##########################################
 /* Get references to DOM elements */
+//const display = document.getElementById('display');
 const incrementButton = document.querySelector('.button-increment');
 const decrementButton = document.querySelector('.button-decrement');
 const resetButton = document.querySelector('.button-reset');
 const numberInput = document.querySelector('.number-input');
 
-/* Function to update the counter value */
+//let total = 0;
+
+//document.getElementById('increment').addEventListener('click', function () {
+/*   if (total > 99) {
+   total++;
+    display.value = total;
+    }
+}) */
+// Function to update the value 
 function updateCounter(newValue) {
-    if (newValue < 0) {
-        newValue = 0;
+    if (newValue < -99) {
+        newValue = -99;
+    } else if (newValue > 99) {
+        newValue = 99;
     }
     numberInput.value = newValue;
 }
-// Add this to limit the number 
-/* else if (newValue > 1000) {
+//Limiter for counter number
+/*
+function updateCounter(newValue) {
+    if (newValue < 0) {
+        newValue = 0;
+    } else if (newValue > 1000) {
         newValue = 1000;
-    }*/
-
-/* Event listeners for the buttons and input field*/
+    }
+    numberInput.value = newValue;
+}
+*/
+   
+// Event listeners for buttons and input field
 incrementButton.addEventListener('click', () => {
     let currentValue = parseInt(numberInput.value);
     updateCounter(currentValue + 1);
