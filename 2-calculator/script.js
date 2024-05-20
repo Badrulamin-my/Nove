@@ -1,57 +1,91 @@
-let output = document.getElementById('output-value');
+const outputDisplay = document.getElementById('output-value');
+const historyDisplay = document.getElementById('history-value');
+const numberButtons = document.getElementsByClassName('number');
+const operatorButtons = document.getElementsByClassName('operator');
+const clearButton = document.getElementById('clear');
+const backspaceButton = document.getElementById('backspace');
+const equalsButton = document.getElementById('=');
 
-let value = '';
+let currentValue = '';
+let previousValue = '';
+let currentOperator = '';
 
-document.getElementById('1').addEventListener('click', function () {
-    value += '1';
-    output.innerHTML = value;
+function appendNumber(number) {
+    if (currentValue === '0') {
+        currentValue = number;
+    } else if (currentValue.length <= 16) {
+        currentValue += number;
+    }
+    outputDisplay.innerHTML = currentValue;
+}
+
+for (let btn of numberButtons) {
+    btn.addEventListener('click', () => {
+        appendNumber(btn.innerHTML);
+    });
+}
+
+function chooseOperator(operator) {
+    if (currentValue === '') return;
+    if (previousValue !== '') {
+        compute();
+    }
+    currentOperator = operator;
+    previousValue = currentValue;
+    currentValue = '';
+    historyDisplay.innerHTML = `${previousValue} ${currentOperator}`;
+}
+
+for (let btn of operatorButtons) {
+    btn.addEventListener('click', () => {
+        chooseOperator(btn.innerHTML);
+    });
+}
+
+function compute() {
+    let computation;
+    const prev = parseFloat(previousValue);
+    const current = parseFloat(currentValue);
+    if (isNaN(prev) || isNaN(current)) return;
+    switch (currentOperator) {
+        case '+':
+            computation = prev + current;
+            break;
+        case '-':
+            computation = prev - current;
+            break;
+        case '×':
+            computation = prev * current;
+            break;
+        case '÷':
+            computation = prev / current;
+            break;
+        case '%':
+            computation = prev % current;
+            break;
+        default:
+            return;
+    }
+    currentValue = computation;
+    currentOperator = undefined;
+    previousValue = '';
+    outputDisplay.innerHTML = currentValue;
+    historyDisplay.innerHTML = '';
+}
+
+equalsButton.addEventListener('click', () => {
+    compute();
 });
 
-document.getElementById('2').addEventListener('click', function () {
-    value += '2';
-    output.innerHTML = value;
+clearButton.addEventListener('click', () => {
+    outputDisplay.innerHTML = '';
+    currentValue = '';
+    previousValue = '';
+    currentOperator = '';
+    historyDisplay.innerHTML = '';
 });
 
-document.getElementById('3').addEventListener('click', function () {
-    value += '3';
-    output.innerHTML = value;
-});
-
-document.getElementById('4').addEventListener('click', function () {
-    value += '4';
-    output.innerHTML = value;
-});
-
-document.getElementById('5').addEventListener('click', function () {
-    value += '5';
-    output.innerHTML = value;
-});
-
-document.getElementById('6').addEventListener('click', function () {
-    value += '6';
-    output.innerHTML = value;
-});
-
-document.getElementById('7').addEventListener('click', function () {
-    value += '7';
-    output.innerHTML = value;
-});
-
-document.getElementById('8').addEventListener('click', function () {
-    value += '8';
-    output.innerHTML = value;
-});
-
-document.getElementById('9').addEventListener('click', function () {
-    value += '9';
-    output.innerHTML = value;
-});
-
-document.getElementById('0').addEventListener('click', function () {
-    value += '0';
-    output.innerHTML = value;
-});
-
-document.getElementById('clear').addEventListener('click', function () {
-    output.innerHTML = '';
+backspaceButton.addEventListener('click', () => {
+    currentValue = currentValue.toString().slice(0, -1);
+    outputDisplay.innerHTML = currentValue;
 });
