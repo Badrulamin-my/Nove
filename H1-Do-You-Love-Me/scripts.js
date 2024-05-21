@@ -11,30 +11,40 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     const noButton = document.getElementById('no-button');
+    const yesButton = document.getElementById('yes-button');
     let hoverCount = 0;
-    noButton.addEventListener('mouseover', moveButton);
-    noButton.addEventListener('click', moveButton);
+
+    noButton.addEventListener('mouseover', function() {
+        setTimeout(moveButton, 200);
+    });
+    noButton.addEventListener('click', clickButton);
 
     function moveButton() {
         hoverCount++;
-                if (hoverCount >= 6) {
-                    // Move the no-button behind the yes-button
-                    const yesButton = document.getElementById('yes-button');
-                    const yesButtonRect = yesButton.getBoundingClientRect();
-                    noButton.style.position = 'absolute';
-                    noButton.style.left = `${yesButtonRect.left + 10}px`;//for offset
-                    noButton.style.top = `${yesButtonRect.top + 10}px`; //for offset
-                    noButton.style.zIndex = '-1'; // Ensure the no-button is behind
-                } else {
-                    const x = Math.random() * (window.innerWidth - noButton.clientWidth); //generates a random floating-point number
-                    const y = Math.random() * (window.innerHeight - noButton.clientHeight);
-                    noButton.style.position = 'absolute';
-                    noButton.style.left = `${x}px`;
-                    noButton.style.top = `${y}px`;
-                }
-            }
+        if (hoverCount >= 3) {
+            const yesButtonRect = yesButton.getBoundingClientRect();
+            noButton.style.position = 'absolute';
+            noButton.style.left = `${yesButtonRect.left}px`;
+            noButton.style.top = `${yesButtonRect.top - 15}px`;
+            noButton.style.zIndex = '-1'; // Move behind the yes-button
+        } else {
+            const x = Math.random() * (window.innerWidth - noButton.clientWidth);
+            const y = Math.random() * (window.innerHeight - noButton.clientHeight);
+            noButton.style.position = 'absolute';
+            noButton.style.left = `${x}px`;
+            noButton.style.top = `${y}px`;
+        }
+    }
 
-    const yesButton = document.getElementById('yes-button');
+    function clickButton() {
+        if (hoverCount >= 3) {
+            const yesButtonRect = yesButton.getBoundingClientRect();
+            noButton.style.top = `${yesButtonRect.top + 8}px`; // Move down
+        } else {
+            moveButton();
+        }
+    }
+
     yesButton.addEventListener('click', function() {
         alert('I love you too!!');
     });
